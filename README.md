@@ -24,7 +24,7 @@ A Node.js and Express application that helps users discover recipes by cuisine t
 
    ```
    git clone https://github.com/SarrahGandhi/FoodWinePairingAPI.git
-   cd cuisine-wine-pairing
+   cd FoodWinePairingAPI
    ```
 
 2. Install dependencies:
