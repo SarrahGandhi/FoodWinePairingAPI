@@ -1,0 +1,25 @@
+doctype html
+html
+    head
+        title= recipe.strMeal
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+    body(class="container mt-4")
+
+        div(class="card mx-auto" style="max-width: 600px;")
+            div(class="card-header text-center bg outline-primary text-black")
+                h1= recipe.strMeal
+
+            img(class="card-img-top" src=recipe.strMealThumb alt=recipe.strMeal)
+
+            div(class="card-body")
+                h4 Ingredients:
+                ul(class="list-group list-group-flush")
+                    each ingredient in ingredients
+                        li(class="list-group-item")= ingredient
+
+                h4 Instructions:
+                p !{recipe.strInstructions.replace(/\.\r\n/g, '.<br><BR>')}
+        div(class="text-center mt-3")
+            a(href="/" class="btn btn-secondary") Back to Home

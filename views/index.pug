@@ -1,0 +1,97 @@
+doctype html
+html
+    head
+        title Food and Wine Pairing
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css")
+        link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+
+    body
+        .container.mt-5
+            h1.text-center.text-primary.mb-4 Food and Wine Pairing
+
+            form(action="/" method="get" class="mb-4")
+                .mb-3
+                    label(for="cuisine" class="form-label") Select a Cuisine:
+                    select#cuisine.form-select(name="cuisine" onchange="window.location='/cuisine/' + this.value")
+                        option(value="") -- Select --
+                        each cuisine in cuisines
+                            option(value=cuisine.strArea selected=(cuisine.strArea === selectedCuisine ? 'selected' : false))= cuisine.strArea
+
+            if recipes.length
+                h2.text-success Recipes:
+                if wineData
+                    button.btn.btn-success.mt-2(
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#wineModal"
+                    ) 
+                        i.fas.fa-wine-glass.me-2
+                        | Show Pairing
+
+                .row
+                    each recipe in recipes
+                        .col-md-4.mb-4
+                            .card.shadow-sm
+                                if recipe.strMealThumb
+                                    img(src=recipe.strMealThumb alt=recipe.strMeal class="card-img-top")
+                                    .card-body
+                                        h5.card-title= recipe.strMeal
+                                        a.btn.btn-primary(href="/recipe/" + recipe.idMeal) View Recipe
+
+                // Wine Pairing Modal
+                if wineData
+                    #wineModal.modal.fade(tabindex="-1" aria-labelledby="wineModalLabel" aria-hidden="true")
+                        .modal-dialog.modal-dialog-centered.modal-lg
+                            .modal-content
+                                .modal-header
+                                    h5#wineModalLabel.modal-title Wine Pairing Recommendations
+                                    button.btn-close(type="button" data-bs-dismiss="modal" aria-label="Close")
+                                .modal-body
+                                    if wineData.pairingText
+                                        p.lead= wineData.pairingText
+                                    else
+                                        p.lead.text-muted No general pairing information available
+
+                                    // Paired Wines Section
+                                    if wineData.pairedWines && wineData.pairedWines.length
+                                        .paired-wines.mb-4
+                                            h4 Suggested Wine Types:
+                                            ul.list-unstyled
+                                                each wine in wineData.pairedWines
+                                                    li.mb-2
+                                                        i.fas.fa-wine-glass-alt.me-2
+                                                        | #{wine}
+                                    else
+                                        .alert.alert-warning.mb-4 No specific wine types recommended
+
+                                    // Product Matches Section
+                                    if wineData.productMatches && wineData.productMatches.length
+                                        h4.mb-3 Recommended Products
+                                        .row
+                                            each product in wineData.productMatches
+                                                .col-md-6.mb-3
+                                                    .card.h-100
+                                                        img.card-img-top(src=product.imageUrl || 'https://via.placeholder.com/400x300', alt=product.title, style="height: 200px; object-fit: contain;")
+                                                        .card-body
+                                                            h5.card-title= product.title
+                                                            if product.description
+                                                                p.card-text= product.description
+                                                            .mb-3
+                                                                if product.averageRating
+                                                                    small.text-muted
+                                                                        i.fas.fa-star.text-warning
+                                                                        |  #{product.averageRating} (#{product.ratingCount} reviews)
+                                                            if product.price
+                                                                h5.text-success.mb-3= product.price
+                                                            a.btn.btn-outline-primary(href=product.link, target="_blank" rel="noopener noreferrer")
+                                                                i.fas.fa-shopping-cart.me-2
+                                                                | Buy Now
+                                    else
+                                        .alert.alert-warning No product recommendations available
+
+                                .modal-footer
+                                    button.btn.btn-secondary(type="button" data-bs-dismiss="modal") Close
+
+        script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js")

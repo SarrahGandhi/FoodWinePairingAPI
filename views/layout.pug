@@ -1,0 +1,36 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        title Food and Wine Pairing
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css")
+
+
+    body
+        // Navigation Bar
+        nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+            a.navbar-brand(href="/") Food and Wine Pairing
+            button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation")
+                span.navbar-toggler-icon
+            div.collapse.navbar-collapse(id="navbarNav")
+                ul.navbar-nav.ml-auto
+                    li.nav-item
+                        a.nav-link(href="/cuisine/Italian") Italian
+                    li.nav-item
+                        a.nav-link(href="/cuisine/Mexican") Mexican
+                    li.nav-item
+                        a.nav-link(href="/cuisine/Indian") Indian
+
+        // Main Content
+        .container
+            block content
+
+        // Footer
+        footer.footer.bg-dark.text-white.mt-5.p-4
+            p.text-center © 2025 Food and Wine Pairing | All Rights Reserved
+
+        // JavaScript
+        script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js")
+        script(src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
