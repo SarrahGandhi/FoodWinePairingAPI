@@ -23,7 +23,7 @@ A Node.js and Express application that helps users discover recipes by cuisine t
 1. Clone the repository:
 
    ```
-   git clone https://github.com/
+   git clone https://github.com/SarrahGandhi/FoodWinePairingAPI.git
    cd cuisine-wine-pairing
    ```
 
@@ -37,7 +37,7 @@ A Node.js and Express application that helps users discover recipes by cuisine t
 
    ```
    SPOONACULAR_API_KEY=your_spoonacular_api_key
-   PORT=3000
+   PORT=2560
    ```
 
 4. Start the application:
@@ -68,10 +68,6 @@ The Spoonacular API is used for wine pairing recommendations:
 ```
 cuisine-wine-pairing/
 ├── node_modules/
-├── public/
-│   ├── css/
-│   ├── js/
-│   └── images/
 ├── views/
 │   ├── index.pug
 │   ├── layout.pug
